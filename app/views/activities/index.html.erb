@@ -16,11 +16,9 @@
       <tr>
         <td><%= activity.activity_title %></td>
         <td><%= activity.description %></td>
-        <td><%= activity.type %></td>
-        <td><%= activity.date %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= activity.activity_type %></td>
+        <td><%= activity.updated_at %></td>
+        
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,3 @@
 
 <br>
 
-<%= link_to 'New Activity', new_activity_path %>

@@ -1,147 +1,131 @@
 <div class="container">
-
   <div class="row">
-  <div class="col-md-12">
-    <a href="/contacts">Back to Contacts</a>
-
-  </div>
-
+    <div class="col-md-12">
+      <a href="/contacts">Back to Contacts</a>
+    </div>
     <div class="col-md-6 col-md-offset-3 text-center">
-    
-    <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
+      
+      <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
 
-      <h1>
-        <%= @contact.first_name %> <%= @contact.last_name %>
+
+      <h1 style="font-style:italic;">
+      <%= @contact.first_name %> <%= @contact.last_name %>
       </h1>
-
+<h3>      <%= @contact.job_title %> </h3>
+<h4>
+   <%= @contact.company_name %>
+</h4>
+      <div class="row">
+      <div class="col-md-12 text-center">
       <p>
-        <strong>Company name:</strong>
-        <%= @contact.company_name %>
       </p>
       <p>
-        <strong>Telephone:</strong>
-        <a href="callto:<%= @contact.telephone %>"><%= @contact.telephone %></a>
+      <strong><i class="fa fa-phone"> </i>       <a href="callto:<%= @contact.telephone %>"><%= @contact.telephone %></a>
+</strong>
       </p>
-
       <p>
-        <strong>Email:</strong>
-        <a href="mailto:<%= @contact.email %>"> <%= @contact.email %></a>
-      </p>
-
-      <p>
-        <strong>Job title:</strong>
-        <%= @contact.job_title %>
-      </p>
-
-     <p>
-        <strong>Notes:</strong>
-        <%= @contact.notes %>
-
-      </p>
-
-  </div>
-
-    <div class="col-md-6 col-md-offset-3 text-left">
+      <strong><i class="fa fa-envelope-o"> </i>       <a href="mailto:<%= @contact.email %>"> <%= @contact.email %></a>
+</strong>
 
 
-  
-
-<%= form_for [@contact, @activity] do |f| %>
-  
-  <% if @activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
-
-      <ul>
-      <% @activity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  
-  <div class="field">
-    <%= f.label :description, "New Activity" %><br>
-    <%= f.text_area :description, :class => "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :activity_type %><br>
-       <%= f.select :activity_type, "<option>Call</option><option>Email</option><option>Meeting</option><option>Website Visit</option>".html_safe, {},  {:class => "form-control" } %> 
-  </div>
-<br>
-    <div class="field" style="display:none">
-    <%= f.label :contact_id %><br>
-    <%= f.number_field :contact_id, value: @contact.id %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Add Activity", {:class => "btn btn-info"} %>
-  </div>
-<% end %>
-
-
-<h2>Recent Activity</h2>
-          <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
-            <div class="well">
-   
-              <b><%= activity.activity_type %></b>
-               <td><%= activity.description %></td>
-              <hr>
-               <i><%= time_ago_in_words(activity.updated_at) %> ago</i>
-       
-         </div >
-         <% end %>
-   <a href="#">See the rest of the activities</a>
-   <br>
-
-     <%= link_to 'Edit', edit_contact_path(@contact) %> |
-     <%= link_to 'Back', contacts_path %>
-
-
-<br>
-<hr>
-<% @months = []%>
-<% @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
-<% @monthly_activities.each do |month, activity| %>
-    <% @monthly_activities[month].map do |activity|%>
-        <% @months << {month => activity}%>
-    <%end%>
-<%end%>
-<%@november =  @months.map {|h| h[11]}.uniq%>
-<hr>
-
-
-
-<div class="row text-center">
-    <div class="col-md-2">
-      <b> <%= Date::MONTHNAMES[Date.today.month - 5] %></b>
-    </div>
-    <div class="col-md-2">
-      <b> <%= Date::MONTHNAMES[Date.today.month - 4] %></b>
+     
       </div>
-    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 3] %></b></div>
-    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 2] %></b></div>
-    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 1] %></b></div>
-    <div class="col-md-2">
-
-
-
-    <b> <%= Date::MONTHNAMES[Date.today.month] %></b>
-    <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
-        <div><%= activity.updated_at.day %></div>
-    <%end%>
-
-
-
-
-  <a class="btn btn-default btn-sm">Activity Name</a>
-
-  <a class="btn btn-default btn-sm">Activity Name</a>
-
-    </div>
-
+        
+    
+     
 </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-md-offset-3 text-left">
+      
+      <%= form_for [@contact, @activity] do |f| %>
+      
+      <% if @activity.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+        <ul>
+          <% @activity.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <br>
+      <div class="field">
+        <%= f.text_area :description, :class => "form-control", :placeholder => "Record activity...", :style => "height:100px;" %>
+      </div>
+      <div class="field">
 
-   </dirailv>
- </div>  
+<label>Choose the type of activity</label>
+        <%= f.select :activity_type, "<option>Call</option><option>Email</option><option>Meeting</option><option>Website Visit</option>".html_safe, {},  {:class => "form-control" }%>
+      </div>
+      <br>
+      <div class="field" style="display:none">
+        <%= f.label :contact_id %><br>
+        <%= f.number_field :contact_id, value: @contact.id %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Add Activity", {:class => "btn btn-info"} %>
+      </div>
+      <% end %>
+      <h2>Recent Activity</h2>
+      <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
+      <div class="well">
+        
+        <b><%= activity.activity_type %></b>
+        <td><%= activity.description %></td>
+        <br><br>
+        <i><%= activity.updated_at.strftime("%B %d") %></i>
+        
+      </div >
+      <% end %>
+      <a href="#">See the rest of the activities</a>
+      <br>
+      <%= link_to 'Edit', edit_contact_path(@contact) %> |
+      <%= link_to 'Back', contacts_path %>
+      <br>
+      <hr>
+      <% @months = []%>
+      <% @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
+      <% @monthly_activities.each do |month, activity| %>
+      <% @monthly_activities[month].map do |activity|%>
+      <% @months << {month => activity}%>
+      <%end%>
+      <%end%>
+      <%@november =  @months.map {|h| h[11]}.uniq%>
+      <hr>
+      <div class="colorful" style="background-color:#333;  padding-top:100px; border-radius:4px; color: #fff; margin-right:20px;">
+        <div class="row text-center">
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2" style="margin-left:75%;">
+            
+            <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
+            <a class="btn btn-default"> <%= activity.updated_at.day %>th </a>
+            <%end%>
+          </div>
+        </div>
+
+
+        <div class="row text-center" style="position:absolute; bottom:0px; text-align:center; margin-left:10px;">
+          <div class="col-md-2">
+            <b> <%= Date::MONTHNAMES[Date.today.month - 5][0..2] %></b>
+          </div>
+          <div class="col-md-2">
+            <b> <%= Date::MONTHNAMES[Date.today.month - 4][0..2] %></b>
+          </div>
+          <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 3][0..2] %></b></div>
+          <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 2][0..2] %></b></div>
+          <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 1][0..2] %></b></div>
+          <div class="col-md-2">
+            <b> <%= Date::MONTHNAMES[Date.today.month][0..2] %></b>
+            
+          </div>
+        </div>
+
+        <br>
+      </div>
+    </div>
