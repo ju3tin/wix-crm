@@ -12,6 +12,7 @@ gem 'bootstrap-sass', '~> 3.3.0'
 gem 'sass-rails', '>= 3.2'
 gem 'autoprefixer-rails'
 
+gem 'wix-hive-ruby'
 
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views

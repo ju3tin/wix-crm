@@ -1,20 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
+
 
       <h1>Welcome to Wix CRM</h1>
-
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
  <%= link_to 'New Contact', new_contact_path, :class => "btn btn-primary btn-lg" %>
 
-      <div ng-init="contacts = <%= @contacts.each.to_json  %>
+</div>
+<div class="col-md-6">
+
+        <input type="search" ng-model="q" placeholder="Search" class="form-control"/>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+ <div ng-init="contacts = <%= @contacts.each.to_json  %>
         ">
-        You have {{contacts.length}} contacts. They are:
-
-        <input type="search" ng-model="q" placeholder="search..." class="form-control"/>
-        <br>
-
-
-        <table>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>First name</th>

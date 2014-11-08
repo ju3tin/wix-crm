@@ -1,8 +1,14 @@
 <div class="container">
 
   <div class="row">
+  <div class="col-md-12">
+    <a href="/contacts">Back to Contacts</a>
+
+  </div>
 
     <div class="col-md-6 col-md-offset-3">
+
+
 
     <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
 
@@ -30,11 +36,12 @@
       </p>
 
      <p>
-        <strong>NOTES:</strong>
+        <strong>Notes:</strong>
         <%= @contact.notes %>
 
       </p>
 
+<h2>Recent Notes</h2>
         <tbody>
           <% @contact.activities.each do |activity| %>
             <div class="well">
@@ -50,7 +57,10 @@
          <% end %>
        
      
+
      <%= link_to 'New Activity', new_contact_activity_path(@contact), :class => "btn btn-default btn-block" %>
+
+
 
 
      <%= link_to 'Edit', edit_contact_path(@contact) %> |

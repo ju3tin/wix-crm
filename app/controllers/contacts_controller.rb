@@ -16,11 +16,33 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    @activity = Activity.new
   end
+
 
   # GET /contacts/new
   def new
     @contact = Contact.new
+
+
+    Hive::Client.new do |config|
+      config.secret_key = 'd7d066b8-d609-405b-b6e4-bb2e60975c73'
+      config.app_id = '13a4baa8-bfde-bc52-9ead-daa8592a95f9'
+      config.instance_id = 'INSTANCE-ID'
+    end
+    puts "HELLO HIVE"
+
+    contact = Hive::Contact.new
+    contact.name.first = 'E2E'
+    contact.name.last = 'Cool'
+    contact.company.name = 'Wix'
+    contact.company.role = 'CEO'
+    contact.add_email(email: 'alext@wix.com', tag: 'work')
+    contact.add_phone(phone: '123456789', tag: 'work')
+    contact.add_address(tag: 'home', address: '28208 N Inca St.', neighborhood: 'LODO', city: 'Denver', region: 'CO', country: 'US', postalCode: '80202')
+    contact.add_date(date: Time.now.iso8601(3), tag: 'E2E')
+    contact.add_url(url: 'wix.com', tag: 'site')
+
   end
 
   # GET /contacts/1/edit
