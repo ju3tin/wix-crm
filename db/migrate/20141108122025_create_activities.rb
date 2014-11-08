@@ -3,7 +3,7 @@ class CreateActivities < ActiveRecord::Migration
     create_table :activities do |t|
       t.string :activity_title
       t.text :description
-      t.string :type
+      t.string :activity_type
       t.datetime :date
 
       t.timestamps

@@ -1,4 +1,5 @@
-<%= form_for(@activity) do |f| %>
+<%= form_for [@contact, @activity] do |f| %>
+  
   <% if @activity.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
@@ -20,13 +21,19 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label :activity_type %><br>
+    <%= f.text_field :activity_type %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
     <%= f.datetime_select :date %>
   </div>
+
+    <div class="field" style="display:none">
+    <%= f.label :contact_id %><br>
+    <%= f.number_field :contact_id, value: @contact.id %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

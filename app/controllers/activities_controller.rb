@@ -14,6 +14,7 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/new
   def new
+    @contact = Contact.find(params[:contact_id])
     @activity = Activity.new
   end
 
@@ -24,11 +25,12 @@ class ActivitiesController < ApplicationController
   # POST /activities
   # POST /activities.json
   def create
+    @contact = Contact.find(params[:contact_id])
     @activity = Activity.new(activity_params)
-
+    
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to contacts_path, notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:activity_title, :description, :type, :date)
+      params.require(:activity).permit(:activity_title, :description, :activity_type, :date, :contact_id)
     end
 end

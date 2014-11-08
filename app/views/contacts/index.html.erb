@@ -1,34 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Email</th>
-      <th>Company name</th>
-      <th>Job title</th>
-      <th>Telephone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <h1>Welcome to Wix CRM</h1>
 
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.first_name %></td>
-        <td><%= contact.last_name %></td>
-        <td><%= contact.email %></td>
-        <td><%= contact.company_name %></td>
-        <td><%= contact.job_title %></td>
-        <td><%= contact.telephone %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+ <%= link_to 'New Contact', new_contact_path, :class => "btn btn-primary btn-lg" %>
 
-<br>
+      <div ng-init="contacts = <%= @contacts.each.to_json  %>
+        ">
+        You have {{contacts.length}} contacts. They are:
 
-<%= link_to 'New Contact', new_contact_path %>
+        <input type="search" ng-model="q" placeholder="search..." class="form-control"/>
+        <br>
+
+
+        <table>
+          <thead>
+            <tr>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th>Company name</th>
+              <th>Job title</th>
+              <th>Telephone</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr class="animate-repeat" ng-repeat="contact in contacts | filter:q as results">
+             <td><a href="contacts/{{contact.id}}">{{contact.first_name}}</a>  </td>
+             <td>{{contact.last_name}}  </td>
+
+             <td>{{contact.email }}  </td>
+             <td>{{contact.company_name }}  </td>
+             <td>{{contact.job_title }}  </td>
+             <td>{{contact.telephone }}  </td>
+             <td>
+              <a href="contacts/{{contact.id}}/edit">EDIT</a> 
+             </td>
+             <td>
+
+            <a href="contacts/{{contact.id}}" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete Jared Clement">delete</a>
+
+              <a href="contacts/{{contact.id}}/destroy">DELETE</a> 
+             </td>
+           </tr>
+           <li class="animate-repeat" ng-if="results.length == 0">
+            <strong>No results found...</strong>
+          </li>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+
+
+
+
+
+  </div>
+</div>
+</div>

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108123218) do
+ActiveRecord::Schema.define(version: 20141108125751) do
 
   create_table "activities", force: true do |t|
     t.string   "activity_title"
     t.text     "description"
-    t.string   "type"
+    t.string   "activity_type"
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,9 +32,6 @@ ActiveRecord::Schema.define(version: 20141108123218) do
     t.integer  "telephone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "activity_id"
   end
-
-  add_index "contacts", ["activity_id"], name: "index_contacts_on_activity_id"
 
 end
