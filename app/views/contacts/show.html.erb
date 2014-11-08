@@ -84,7 +84,7 @@
 
 
 <h2>Recent Activity</h2>
-          <% @contact.activities.order("updated_at DESC").each do |activity| %>
+          <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
             <div class="well">
    
               <b><%= activity.activity_type %></b>
@@ -94,15 +94,39 @@
        
          </div >
          <% end %>
-       
-    
-    <script type="text/javascript">
-  $(".well").count();
-
-    </script>
+   <a href="#">See the rest of the activities</a>
+   <br>
 
 
      <%= link_to 'Edit', edit_contact_path(@contact) %> |
      <%= link_to 'Back', contacts_path %>
+
+
+<br>
+<hr>
+
+
+<div class="row text-center">
+    <div class="col-md-2">
+      <b> <%= Date::MONTHNAMES[Date.today.month - 5] %></b>
+    </div>
+    <div class="col-md-2">
+      <b> <%= Date::MONTHNAMES[Date.today.month - 4] %></b>
+      </div>
+    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 3] %></b></div>
+    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 2] %></b></div>
+    <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 1] %></b></div>
+    <div class="col-md-2">
+
+    <b> <%= Date::MONTHNAMES[Date.today.month] %></b>
+
+  <a class="btn btn-default btn-sm">Activity Name</a>
+
+  <a class="btn btn-default btn-sm">Activity Name</a>
+
+    </div>
+
+</div>
+
    </div>
  </div>  
