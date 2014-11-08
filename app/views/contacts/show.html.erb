@@ -1,62 +1,59 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>First name:</strong>
-  <%= @contact.first_name %>
-</p>
+  <div class="row">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @contact.last_name %>
-</p>
+    <div class="col-md-6 col-md-offset-3">
 
-<p>
-  <strong>Email:</strong>
-  <%= @contact.email %>
-</p>
+    <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
 
-<p>
-  <strong>Company name:</strong>
-  <%= @contact.company_name %>
-</p>
+      <h1>
+        <%= @contact.first_name %> <%= @contact.last_name %>
+      </h1>
 
-<p>
-  <strong>Job title:</strong>
-  <%= @contact.job_title %>
-</p>
+      <p>
+        <strong>Company name:</strong>
+        <%= @contact.company_name %>
+      </p>
+      <p>
+        <strong>Telephone:</strong>
+        <%= @contact.telephone %>
+      </p>
 
-<p>
-  <strong>Telephone:</strong>
-  <%= @contact.telephone %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= @contact.email %>
+      </p>
 
+      <p>
+        <strong>Job title:</strong>
+        <%= @contact.job_title %>
+      </p>
 
+     <p>
+        <strong>NOTES:</strong>
+        <%= @contact.notes %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Activity title</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>Date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      </p>
 
-  <tbody>
-    <% @contact.activities.each do |activity| %>
-      <tr>
-       <td><%= activity.id %></td>
-        <td><%= activity.activity_title %></td>
-        <td><%= activity.description %></td>
-        <td><%= activity.activity_type %></td>
-        <td><%= activity.date %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'New Activity', new_contact_activity_path(@contact) %>
+        <tbody>
+          <% @contact.activities.each do |activity| %>
+            <div class="well">
+   
+          <tr>
+           <td><%= activity.id %></td>
+           <td><%= activity.activity_title %></td>
+           <td><%= activity.description %></td>
+           <td><%= activity.activity_type %></td>
+           <td><%= activity.date %></td>
+           </tr>
+         </div >
+         <% end %>
+       
+     
+     <%= link_to 'New Activity', new_contact_activity_path(@contact), :class => "btn btn-default btn-block" %>
 
 
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+     <%= link_to 'Edit', edit_contact_path(@contact) %> |
+     <%= link_to 'Back', contacts_path %>
+   </div>
+ </div>  

@@ -36,13 +36,12 @@
              <td>{{contact.job_title }}  </td>
              <td>{{contact.telephone }}  </td>
              <td>
-              <a href="contacts/{{contact.id}}/edit">EDIT</a> 
+              <a  class="btn btn-warning" href="contacts/{{contact.id}}/edit">Edit</a> 
              </td>
              <td>
 
-            <a href="contacts/{{contact.id}}" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Delete Jared Clement">delete</a>
+            <a href="contacts/{{contact.id}}" class="btn btn-danger" data-confirm="You sure?" data-method="delete" rel="nofollow" title="Seriously delete this guy?">Delete</a>
 
-              <a href="contacts/{{contact.id}}/destroy">DELETE</a> 
              </td>
            </tr>
            <li class="animate-repeat" ng-if="results.length == 0">
