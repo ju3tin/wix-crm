@@ -129,7 +129,7 @@
 
     <b> <%= Date::MONTHNAMES[Date.today.month] %></b>
     <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
-        <li><%= activity.activity_type %></li>
+        <div><%= activity.updated_at.day %></div>
     <%end%>
 
 
