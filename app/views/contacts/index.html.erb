@@ -48,18 +48,64 @@
               <td>{{contact.company_name }}  </td>
               <td>{{contact.telephone }}  </td>
               
-              <td>{{contact.email }}  </td>
+              <td>{{contact.email }} </td>
               
               <td>
               
-              <a href="#" remote="true" data-toggle="modal" data-target="#modal-window" data-backdrop="true"> 
-
+              <a href="#" remote="true" data-toggle="modal" data-target="#modal-window{{contact.id}} " data-backdrop="true"> 
                   <i class="fa fa-file"></i>
               </a>
+              
+  <!-- modal -->
+  <div class="modal fade" id="modal-window{{contact.id}}">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+          <h3 class="modal-title text-center">{{contact.first_name}} {{contact.last_name}}</h3>
+        </div>
+        <div class="modal-body">
+<div class="row text-center">
+          <div class="col-md-6 col-md-offset-3">
+            <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
+<br>
+<br>
+<div class="text-left">
+<div class="row">
+<div class="col-md-4">
+     <b>Company</b>   
+     <br>
+<b>Telephone</b>
+<br>
+<b>Email</b>
+<br>
+<b>Job Title</b>
 
+     </div> 
+     <div class="col-md-8">
+ 
+{{contact.company_name }}
+<br>
+{{contact.telephone }}
 
+{{contact.email }}
 
+{{contact.job_title }}
+</div>
+<br>
+</div>
+<br><br>
 
+<a href="/contacts/{{contact.id}}" class="btn btn-default">View More</a>
+</div>
+</div>
+</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
 
 
               </td>
@@ -77,22 +123,7 @@
     </div>
   </div>
 
-  <!-- modal -->
-  <div class="modal fade" id="modal-window">
-    <div class="modal-dialog" >
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-          <h3 class="modal-title">Modal title</h3>
-        </div>
-        <div class="modal-body"></div>
-        <div class="modal-footer">
 
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.modal -->
 
 
 
