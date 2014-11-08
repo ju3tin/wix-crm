@@ -11,6 +11,10 @@
       <h1 style="font-style:italic;">
       <%= @contact.first_name %> <%= @contact.last_name %>
       </h1>
+
+
+
+
       <h3><%= @contact.job_title %> </h3>
       <h4>
       <%= @contact.company_name %>
@@ -57,6 +61,10 @@
       </div>
       <% end %>
       <a href="#">See the rest of the activities</a>
+
+      
+
+
       <br>
       <div class="field">
         <%= f.text_area :description, :class => "form-control", :placeholder => "Record activity...", :style => "height:100px;" %>
@@ -84,7 +92,7 @@
       <%end%>
       <%@november =  @months.map {|h| h[11]}.uniq%>
       <hr>
-      <div class="colorful" style="background-color:#333;  padding-top:100px; border-radius:4px; color: #fff; margin-right:20px;">
+      <div class="colorful" style="background-color:#999;  padding-top:100px; border-radius:4px; color: #fff; margin-right:20px;">
 
         <div class="row text-center">
           <div class="col-md-2"></div>
@@ -96,21 +104,14 @@
 
           <div class="col-md-2" style="margin-left:-120px;">
             <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
-            <button class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left"  id="dude"> <%= activity.updated_at.day %>th </button>
-            
 
 
-<a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
+            <p class="btn btn-default" title="<%= activity.description %>" rel="tooltip">
 
+            <%= activity.updated_at.day %>th 
 
-<div class="tooltip top" role="tooltip">
-  <div class="tooltip-arrow"></div>
-  <div class="tooltip-inner">
-    Some tooltip text!
-  </div>
-</div>
-
-
+            </p>
+         
             <%end%>
           </div>
         </div>
