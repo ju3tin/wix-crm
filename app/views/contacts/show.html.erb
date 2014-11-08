@@ -104,9 +104,13 @@
 
 <br>
 <hr>
-<%= @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
-#TODO JEROME
-
+<% @months = []%>
+<% @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
+<% @monthly_activities.each do |month, activity| %>
+    <% @monthly_activities[month].map do |activity|%>
+        <% @months << {month => activity}%>
+    <%end%>
+<%end%>
 <hr>
 
 
