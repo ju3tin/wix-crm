@@ -1,45 +1,51 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <a href="/contacts">Back to Contacts</a>
+  <div class="row" style="margin-top:10px;">
+    <div class="col-md-6 text-left">
+      <%= link_to 'Back to Contacts', contacts_path %>
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to 'Edit', edit_contact_path(@contact) %>
     </div>
     <div class="col-md-6 col-md-offset-3 text-center">
-      
       <img src="http://lorempixel.com/160/160/people/" class="img-circle img-responsive img-thumbnail">
-
-
       <h1 style="font-style:italic;">
       <%= @contact.first_name %> <%= @contact.last_name %>
       </h1>
-<h3>      <%= @contact.job_title %> </h3>
-<h4>
-   <%= @contact.company_name %>
-</h4>
+      <h3><%= @contact.job_title %> </h3>
+      <h4>
+      <%= @contact.company_name %>
+      </h4>
       <div class="row">
-      <div class="col-md-12 text-center">
-      <p>
-      </p>
-      <p>
-      <strong><i class="fa fa-phone"> </i>       <a href="callto:<%= @contact.telephone %>"><%= @contact.telephone %></a>
-</strong>
-      </p>
-      <p>
-      <strong><i class="fa fa-envelope-o"> </i>       <a href="mailto:<%= @contact.email %>"> <%= @contact.email %></a>
-</strong>
-
-
-     
-      </div>
+        <div class="col-md-12   text-left">
+          
+          <p>
+          <strong><i class="fa fa-phone"> </i>       <a href="callto:<%= @contact.telephone %>"><%= @contact.telephone %></a>
+          </strong>
+          </p>
+          <p>
+          <strong><i class="fa fa-envelope-o"> </i>       <a href="mailto:<%= @contact.email %>"> <%= @contact.email %></a>
+          </strong>
+          </p>
+        </div>
         
-    
-     
-</div>
       </div>
     </div>
-    <div class="col-md-6 col-md-offset-3 text-left">
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 text-left">
+      <br>
+      
+      <h5>Recent Activity</h5>
+      <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
+      <div class="well">
+        <b><%= activity.activity_type %></b>
+        <td><%= activity.description %></td>
+        <br><br>
+        <i><%= activity.updated_at.strftime("%B %d") %></i>
+      </div >
+      <% end %>
       
       <%= form_for [@contact, @activity] do |f| %>
-      
       <% if @activity.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
@@ -50,13 +56,13 @@
         </ul>
       </div>
       <% end %>
+      <a href="#">See the rest of the activities</a>
       <br>
       <div class="field">
         <%= f.text_area :description, :class => "form-control", :placeholder => "Record activity...", :style => "height:100px;" %>
       </div>
       <div class="field">
-
-<label>Choose the type of activity</label>
+        <label>Choose the type of activity</label>
         <%= f.select :activity_type, "<option>Call</option><option>Email</option><option>Meeting</option><option>Website Visit</option>".html_safe, {},  {:class => "form-control" }%>
       </div>
       <br>
@@ -64,27 +70,11 @@
         <%= f.label :contact_id %><br>
         <%= f.number_field :contact_id, value: @contact.id %>
       </div>
-      <div class="actions">
-        <%= f.submit "Add Activity", {:class => "btn btn-info"} %>
-      </div>
+      
+      <%= f.submit "Add Activity", {:class => "btn btn-info"} %>
+      
       <% end %>
-      <h2>Recent Activity</h2>
-      <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
-      <div class="well">
-        
-        <b><%= activity.activity_type %></b>
-        <td><%= activity.description %></td>
-        <br><br>
-        <i><%= activity.updated_at.strftime("%B %d") %></i>
-        
-      </div >
-      <% end %>
-      <a href="#">See the rest of the activities</a>
-      <br>
-      <%= link_to 'Edit', edit_contact_path(@contact) %> |
-      <%= link_to 'Back', contacts_path %>
-      <br>
-      <hr>
+      
       <% @months = []%>
       <% @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
       <% @monthly_activities.each do |month, activity| %>
@@ -95,20 +85,21 @@
       <%@november =  @months.map {|h| h[11]}.uniq%>
       <hr>
       <div class="colorful" style="background-color:#333;  padding-top:100px; border-radius:4px; color: #fff; margin-right:20px;">
+
         <div class="row text-center">
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
+
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
-          <div class="col-md-2" style="margin-left:75%;">
-            
+
+          <div class="col-md-2" style="margin-left:-120px;">
             <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
             <a class="btn btn-default"> <%= activity.updated_at.day %>th </a>
             <%end%>
           </div>
         </div>
-
 
         <div class="row text-center" style="position:absolute; bottom:0px; text-align:center; margin-left:10px;">
           <div class="col-md-2">
@@ -122,10 +113,13 @@
           <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 1][0..2] %></b></div>
           <div class="col-md-2">
             <b> <%= Date::MONTHNAMES[Date.today.month][0..2] %></b>
-            
           </div>
         </div>
 
         <br>
       </div>
+
+    </div>
+    </div>
+    <br>
     </div>
