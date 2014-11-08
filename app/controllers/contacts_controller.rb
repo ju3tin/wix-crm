@@ -17,6 +17,8 @@ class ContactsController < ApplicationController
   # GET /contacts/1.json
   def show
     @activity = Activity.new
+
+
   end
 
 

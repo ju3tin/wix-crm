@@ -69,7 +69,7 @@
   </div>
   <div class="field">
     <%= f.label :activity_type %><br>
-       <%= f.select :activity_type, "<option>1. Call</option><option>2. Email</option><option>3. Meeting</option><option>4. Website Visit</option>".html_safe, {},  {:class => "form-control" } %> 
+       <%= f.select :activity_type, "<option>Call</option><option>Email</option><option>Meeting</option><option>Website Visit</option>".html_safe, {},  {:class => "form-control" } %> 
   </div>
 <br>
     <div class="field" style="display:none">
@@ -104,6 +104,11 @@
 
 <br>
 <hr>
+<%= @monthly_activities = @contact.activities.group_by { |t| t.updated_at.month }%>
+#TODO JEROME
+
+<hr>
+
 
 
 <div class="row text-center">
@@ -118,7 +123,17 @@
     <div class="col-md-2"><b> <%= Date::MONTHNAMES[Date.today.month - 1] %></b></div>
     <div class="col-md-2">
 
+
+
     <b> <%= Date::MONTHNAMES[Date.today.month] %></b>
+
+          <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
+                        <a href=""><%= activity.activity_type %></a>
+
+<% end %>
+
+
+
 
   <a class="btn btn-default btn-sm">Activity Name</a>
 
@@ -128,5 +143,5 @@
 
 </div>
 
-   </div>
+   </dirailv>
  </div>  
