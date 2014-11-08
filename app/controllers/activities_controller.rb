@@ -30,7 +30,7 @@ class ActivitiesController < ApplicationController
     
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to contacts_path, notice: 'Activity was successfully created.' }
+        format.html { redirect_to contact_path(@contact), notice: 'Activity was successfully created.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }

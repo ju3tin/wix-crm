@@ -6,7 +6,7 @@
 
   </div>
 
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 text-center">
 
 
 
@@ -22,12 +22,12 @@
       </p>
       <p>
         <strong>Telephone:</strong>
-        <%= @contact.telephone %>
+        <a href="callto:<%= @contact.telephone %>"><%= @contact.telephone %></a>
       </p>
 
       <p>
         <strong>Email:</strong>
-        <%= @contact.email %>
+        <a href="mailto:<%= @contact.email %>"> <%= @contact.email %></a>
       </p>
 
       <p>
@@ -41,26 +41,65 @@
 
       </p>
 
-<h2>Recent Notes</h2>
-        <tbody>
-          <% @contact.activities.each do |activity| %>
+  </div>
+
+    <div class="col-md-6 col-md-offset-3 text-left">
+
+
+  
+
+<%= form_for [@contact, @activity] do |f| %>
+  
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+      <% @activity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="field">
+    <%= f.label :description, "New Activity" %><br>
+    <%= f.text_area :description, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :activity_type %><br>
+       <%= f.select :activity_type, "<option>1. Call</option><option>2. Email</option><option>3. Meeting</option><option>4. Website Visit</option>".html_safe, {},  {:class => "form-control" } %> 
+  </div>
+<br>
+    <div class="field" style="display:none">
+    <%= f.label :contact_id %><br>
+    <%= f.number_field :contact_id, value: @contact.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add Activity", {:class => "btn btn-info"} %>
+  </div>
+<% end %>
+
+
+<h2>Recent Activity</h2>
+          <% @contact.activities.order("updated_at DESC").each do |activity| %>
             <div class="well">
    
-          <tr>
-           <td><%= activity.id %></td>
-           <td><%= activity.activity_title %></td>
-           <td><%= activity.description %></td>
-           <td><%= activity.activity_type %></td>
-           <td><%= activity.date %></td>
-           </tr>
+              <b><%= activity.activity_type %></b>
+               <td><%= activity.description %></td>
+              <hr>
+               <i><%= time_ago_in_words(activity.updated_at) %> ago</i>
+       
          </div >
          <% end %>
        
-     
+    
+    <script type="text/javascript">
+  $(".well").count();
 
-     <%= link_to 'New Activity', new_contact_activity_path(@contact), :class => "btn btn-default btn-block" %>
-
-
+    </script>
 
 
      <%= link_to 'Edit', edit_contact_path(@contact) %> |
