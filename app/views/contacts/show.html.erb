@@ -111,6 +111,7 @@
         <% @months << {month => activity}%>
     <%end%>
 <%end%>
+<%@november =  @months.map {|h| h[11]}.uniq%>
 <hr>
 
 
@@ -130,11 +131,9 @@
 
 
     <b> <%= Date::MONTHNAMES[Date.today.month] %></b>
-
-          <% @contact.activities.order("updated_at DESC").first(2).each do |activity| %>
-                        <a href=""><%= activity.activity_type %></a>
-
-<% end %>
+    <%  @november.sort_by {|activity| activity[:updated_at]}.each do |activity|%>
+        <li><%= activity.activity_type %></li>
+    <%end%>
 
 
 
