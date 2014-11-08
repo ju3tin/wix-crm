@@ -2,9 +2,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
 
 body{
 	background: #f6f6f6;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .container{
