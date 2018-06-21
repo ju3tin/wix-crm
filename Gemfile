@@ -9,7 +9,7 @@ gem 'rails', '4.1.4'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.0'
-gem 'sass-rails', '>= 3.2'
+gem 'sass-rails', '>= 4.0.5'
 gem 'autoprefixer-rails'
 
 gem 'wix-hive-ruby'
