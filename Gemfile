@@ -9,14 +9,14 @@ gem 'rails', '4.1.4'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.0'
-gem 'sass-rails', '>= 3.2'
+gem 'sass-rails', '>= 4.0.4'
 gem 'autoprefixer-rails'
 
 gem 'wix-hive-ruby'
 
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.1'
 gem "font-awesome-rails"
 
 gem 'angularjs-rails'
